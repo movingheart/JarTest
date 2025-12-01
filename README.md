@@ -20,6 +20,9 @@ JAR包的优势
 # 进入项目根目录
 cd JarTest
 
+# 编译
+javac -d bin src/itranswrap/sample/Main.java
+
 # 创建普通jar包（包含所有编译好的class文件）
 jar cvf mylibrary.jar -C bin .
 ```
@@ -85,6 +88,16 @@ java -cp mylibrary.jar itranswrap.world.Person
 java -cp mylibrary.jar itranswrap.sample.Main
 ```
 
+## 方式三：运行包含依赖文件的包
+运行环境win11 power shell
+
+1. 编译所有java文件：`javac -cp lib\commons-logging-1.3.5.jar -d bin (Get-ChildItem -Recurse src -Filter *.java).FullName`
+2. 创建用于打包的目录：`mkdir build ; cd build`
+3. 拷贝编译好的文件到build目录：`xcopy /s /i ..\bin\* .\`
+4. 把依赖包解压到build目录：`jar xf ..\lib\commons-logging-1.3.5.jar`
+5. 重新打包：`jar cfm ..\app-fat.jar ..\manifest.mf .`
+6. 测试运行：`cd .. ; java -jar app-fat.jar`
+7. 清理过程文件夹：`Remove-Item -Path build -Recurse -Force -ErrorAction SilentlyContinue`
 ## 查看java包内容
 1. 查看jar包内容，命令：`jar tf mylibrary.jar`, 输出如下：
 
