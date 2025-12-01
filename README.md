@@ -100,6 +100,14 @@ java -cp mylibrary.jar itranswrap.sample.Main
 5. 重新打包：`jar cfm ..\app-fat.jar ..\manifest.mf .`
 6. 测试运行：`cd .. ; java -jar app-fat.jar`
 7. 清理过程文件夹：`Remove-Item -Path build -Recurse -Force -ErrorAction SilentlyContinue`
+
+## 方式四：通过maven打jar包
+1. 安装maven，下载：https://maven.apache.org/download.cgi，选binary文件，加压到某个目录；
+2. 设置mvn路径：在设置中找到maven for java, 找到maven的路径设置，把路径填进去；
+3. 生成pom.xml文件，并做好配置；见代码；
+4. 在左下角找到MAVEN, jar-test=>Lifecycle=>package. 点击；
+5. 运行jar文件：`java -jar .\target\jar-test-1.0-SNAPSHOT.jar`
+
 ## 查看java包内容
 1. 查看jar包内容，命令：`jar tf mylibrary.jar`, 输出如下：
 
